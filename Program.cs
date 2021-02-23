@@ -9,15 +9,22 @@ namespace CodingTest
 {
     class Program
     {
-        class Class1
+        class ClAsss1
         {
             public string InvoiceNumber { get; set; }
             public int InvoiceType { get; set; }
 
             public double Amount { get; set; }
-
             public int CustomerNumber { get; set; }
+
+            public int CustomerType { get; set; }
         }
+
+        private List<ClAsss1> TestData = new List<ClAsss1>
+        {
+            new ClAsss1 {Amount = 1}, new ClAsss1 {Amount = 2}, new ClAsss1 {Amount = 3}
+        };
+
         static void Main(string[] args)
         {
             double result = RunTheCode("1");
@@ -29,12 +36,12 @@ namespace CodingTest
         {
             SqlConnection db = new SqlConnection("Server=My connection string");
 
-            List<Class1> x = db.Query<Class1>( "Select * From Invoice where InvoiceType =" + y).ToList();
+            List<ClAsss1> x = db.Query<ClAsss1>( "Select * From Invoice where InvoiceType = " + y).ToList();
 
             double total = 0;
             for (int i = 0; i <= x.Count; i++)
             {
-                total = total + x[i].Amount;
+                total = total + x[0].Amount;
             }
 
             return total;

@@ -1,31 +1,28 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
-
-class Student {
-  id: number = 0;
-  name: string = '';
-}
-
-const testStudents = [ 
-  {id: 1, name: 'Arthur Ash'} as Student,
-  {id: 2, name: 'Martina Navratolova'} as Student,
-  {id: 3, name: 'John McEnroe'} as Student,
-  {id: 4, name: 'Venus Williams'} as Student,
-];
+import { Student, StudentApi } from './StudentApi';
 
 function App() {
 
   const [student, setStudent] = useState<Student>();
   const [students, setStudents] = useState<Student[]>();
-  
+  const [testData, setTestData] = useState<Student[]>();
+
+  useEffect(() => {
+    StudentApi.getStudents().then(res => {
+      setTestData(res);
+    })
+  }, []);
+
   const handleShowStudents = () => {
-    setStudents(testStudents);
+    setStudents(testData);
   }
 
   const handleShowStudent = (student: Student) => () => {
     setStudent(student);
   }
 
+  console.log(`Render: ${new Date()}`)
   return (
     <div className="App">
       <header className="App-header">

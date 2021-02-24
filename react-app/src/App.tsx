@@ -27,8 +27,6 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
-      </header>
       <div className="grid">
         <div className="top"><NavBar /></div>
         <div className="side"><SideBar /></div>
@@ -41,19 +39,22 @@ function App() {
             {students?.map(s =>
 
               <div key={s.id}>
-                Name: {s.name} <button onClick={handleButton2(s)} >Click Me 2</button>
+                <div>
+                  Name: {s.name} <button onClick={handleButton2(s)} >Click Me 2</button>
+                </div>
+                {student && student.id === s.id && <div>
+                  Details: {student.name} (id: {student.id})
+                </div>}
               </div>
             )}
           </div>
 
           <hr />
-          {student && <div>
-            Details: {student.name} (id: {student.id})
-        </div>}
+
         </div>
 
       </div>
-      <div className="side"><Footer /></div>
+      <div className="bottom"><Footer /></div>
 
     </div>
   );

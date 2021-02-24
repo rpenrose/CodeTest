@@ -20,6 +20,8 @@ namespace CodingTest
             public int CustomerType { get; set; }
         }
 
+        private static int[] customerTypes = new[] { 1, 2, 3 };
+
         private List<ClAsss1> TestData = new List<ClAsss1>
         {
             new ClAsss1 {Amount = 1}, new ClAsss1 {Amount = 2}, new ClAsss1 {Amount = 3}
@@ -35,15 +37,15 @@ namespace CodingTest
         private static double RunTheCode(string y)
         {
             SqlConnection db = new SqlConnection("Server=My connection string");
-
-            List<ClAsss1> x = db.Query<ClAsss1>( "Select * From Invoice where InvoiceType = " + y).ToList();
-
             double total = 0;
-            for (int i = 0; i <= x.Count; i++)
+            foreach (int t in customerTypes)
             {
-                total = total + x[0].Amount;
+                List<ClAsss1> x = db.Query<ClAsss1>("Select * From Invoice where CustomerType = " + t + " InvoiceType = " + y).ToList();
+                for (int i = 0; i <= x.Count; i++)
+                {
+                    total = total + x[0].Amount;
+                }
             }
-
             return total;
         }
     }

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using Dapper;
@@ -11,12 +10,8 @@ namespace CodingTest
     {
         class ClAsss1
         {
-            public string InvoiceNumber { get; set; }
             public int InvoiceType { get; set; }
-
             public double Amount { get; set; }
-            public int CustomerNumber { get; set; }
-
             public int CustomerType { get; set; }
         }
 

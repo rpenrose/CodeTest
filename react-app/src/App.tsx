@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
+import NavBar from './NavBar';
 import { Student, StudentApi } from './StudentApi';
+import SideBar from './SideBar';
+import Footer from './Footer';
 
 function App() {
 
@@ -14,38 +17,44 @@ function App() {
     })
   }, []);
 
-  const handleShowStudents = () => {
+  const handleButton1 = () => {
     setStudents(testData);
   }
 
-  const handleShowStudent = (student: Student) => () => {
+  const handleButton2 = (student: Student) => () => {
     setStudent(student);
   }
 
-  console.log(`Render: ${new Date()}`)
   return (
     <div className="App">
       <header className="App-header">
-        <button onClick={handleShowStudents} >Click Show Students</button>
-        <hr />
+      </header>
+      <div className="grid">
+        <div className="top"><NavBar /></div>
+        <div className="side"><SideBar /></div>
+        <div className="content">
 
-        <div>
-          {students?.map(s => 
-            
-            <div key={s.id}>
-              Student: {s.name} <button onClick={handleShowStudent(s)} >Show</button>
-            </div>
-          )}
+          <button onClick={handleButton1} >Click Me</button>
+          <hr />
+
+          <div>
+            {students?.map(s =>
+
+              <div key={s.id}>
+                Name: {s.name} <button onClick={handleButton2(s)} >Click Me 2</button>
+              </div>
+            )}
+          </div>
+
+          <hr />
+          {student && <div>
+            Details: {student.name} (id: {student.id})
+        </div>}
         </div>
 
-        <hr />
-        {student && <div>
-          Details for Student: {student.name} (id: {student.id})  
-        </div>}
+      </div>
+      <div className="side"><Footer /></div>
 
-
-
-      </header>
     </div>
   );
 }

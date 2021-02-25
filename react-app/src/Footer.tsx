@@ -1,4 +1,4 @@
-function Footer() {
+function Footer(data: any) {
     return <div>Footer</div>
 }
   

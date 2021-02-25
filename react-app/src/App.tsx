@@ -25,7 +25,6 @@ function App() {
   }, []);
 
   const handleShowStudents = () => {
-
     MyApi.getStudents().then(res => {
       setStudents(res);
     })
@@ -37,7 +36,6 @@ function App() {
   }
 
   const handleShowHomework = (student: Student) => () => {
-
     MyApi.getHomeworkFor(student.id).then(res => {
       setHomework(res);
     })
